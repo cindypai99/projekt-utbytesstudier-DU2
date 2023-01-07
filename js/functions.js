@@ -196,9 +196,26 @@ function create_programme (programme) {
 
   */  
 
+const new_element = document.createElement ("div"); 
+const parent = document.querySelector ("#programmes > ul");
+parent.appendChild (new_element); 
+
+new_element.classList.add ("programme");
+new_element.innerHTML = `
+<div> 
+  <h5> ${programme.name}</h5>
+  <p> ${UNIVERSITIES[programme.universityID.name]} </p>
+  <p> ${CITIES[UNIVERSITIES[programme.universityID].cityID]},${LANGUAGES[programme.languageID.name]} </p>
+    <div> 
+      <p>${LEVELS[programme.levelID].name}, ${SUBJECTS[programme.subjectID].name}, ${LANGUAGES[programme.languageID.name]}</p>
+  </div>
+</div>
+
+<div class="bottom_programme">
+  <p> ${CITIES[UNIVERSITIES[programme.universityID].cityID].name}, sun-index: ${CITIES[UNIVERSITIES[programme.universityID].cityID].sun} (${percenter(CITIES[UNIVERSITIES[programme.universityID].cityID].sun,365)})%</p>
+</div> 
+`
 }
-
-
 // G
 // CODE according to the specification
 function update_programmes () {
@@ -216,8 +233,6 @@ function update_programmes () {
       NO RETURN VALUE
 
   */
-
-}
 
 
 // G
