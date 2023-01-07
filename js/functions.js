@@ -3,11 +3,6 @@
 // CODE According to specification
 function click_filter_element (event) {
 
-const marked_cliked = event.currentTarget; 
-marked_cliked.classList.toggle("selected");
-
-update_programmes ();
-
   /*
     ARGUMENTS
       event: event-object created when user clicks on one of the filter elements.
@@ -23,7 +18,11 @@ update_programmes ();
     NO RETURN VALUE
 
   */
-  
+const marked_cliked = event.currentTarget; 
+marked_cliked.classList.toggle("selected");
+
+update_programmes ();
+
 }
 
 
@@ -50,6 +49,17 @@ function create_filter_element (data) {
     RETURN VALUE
       Returns a reference to the new dom-element
   */
+
+const parent = data.parent; 
+
+const new_dom_element = document.createElement ("li");
+new_dom_element.classList.add(data.class);
+parent.appendChild(new_dom_element);
+      
+new_dom_element.textContent = data.textContent; 
+new_dom_element.addEventListener("click", click_filter_element);
+
+return new_dom_element;
 
 }
 
