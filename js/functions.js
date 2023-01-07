@@ -233,6 +233,20 @@ function update_programmes () {
       NO RETURN VALUE
 
   */
+ const update_box = document.querySelector ("#programmes > ul");
+update_box.innerHTML = ``;
+
+let programmes = read_filters(); 
+  if (programmes.length !== 0){
+    let text = document.querySelector("#programmes > p");
+    text.innerHTML = ``; 
+  } else {
+    let text = document.querySelector ("#programmes > p");
+    text.innerHTML = `Inga program upfyller nuvarande filter.`; 
+  }
+
+  array_each(programmes, create_programme);
+}
 
 
 // G
