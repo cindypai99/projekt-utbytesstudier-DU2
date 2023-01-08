@@ -18,8 +18,8 @@ function click_filter_element (event) {
     NO RETURN VALUE
 
   */
-const marked_cliked = event.currentTarget; 
-marked_cliked.classList.toggle("selected");
+const marked_when_clicked = event.currentTarget; 
+marked_when_clicked.classList.toggle("selected");
 
 update_programmes ();
 
@@ -111,7 +111,35 @@ function toggle_cities (event) {
 // ATTENTION: You need to write the specification of all three functions:
 //            create_countries_cities_filters, create_country and create_city
 function create_countries_cities_filters () {
+  /* 
+    ARGUMETS
+      - The function doesn´t take any argumets. 
+    SIDE EFFECTS
+      - When this function is running its making sure that the arguments that's called are all the country obejct in COUNTRIES in the function create_country.
+    RETURN
+    - nothing
+  */
   function create_country (country) {
+    /* 
+    ARGUMETS
+      country: objects from COUNTRIESthat contains the following keys,
+      id: id of country
+      name: country name 
+      imagesNormal: image of country
+      
+    SIDE EFFECTS
+      - This function creates a new dom element "div"
+      - Gives the new dom element two classes which is "country" and "filter_container".
+      - After this it changes the id to "country_" + "country.id".
+      - Appends the new dom element to "#country_filter > ul". 
+
+      - Sets the HTML content of the new dom element with the country name and the ul. 
+
+      - When the function create_city is running this is making sure that the arguments are the cities in the array CITIES. 
+    
+    RETURN
+    - nothing
+  */
     const dom = document.createElement("div");
     dom.classList.add("country");
     dom.classList.add("filter_container");
@@ -125,13 +153,29 @@ function create_countries_cities_filters () {
     
     const cities = array_filter(CITIES, test_function);
     function test_function (city) {
+    
       return city.countryID === country.id;
     }
 
     array_each(cities, create_city);
   }
   function create_city (city) {
-
+  /* 
+    ARGUMETS
+      - city: objects from CITIES that contains the following keys,
+      - id: id of city
+      - name: city name 
+      - imagesNormal: image of city
+    SIDE EFFECTS
+      - Creates a new dom element
+      - Parent is `#country_$city.countryID} > ul`
+      - A new class for the dom element is given "selected"
+      - The textContent is set to city.name 
+      
+      - The dataset.id is changed to city.id
+    RETURN
+      - Nothing
+  */
     const dom = create_filter_element({
       parent: document.querySelector(`#country_${city.countryID} > ul`),
       class: "selected",
@@ -143,7 +187,6 @@ function create_countries_cities_filters () {
 
   array_each(COUNTRIES, create_country);
 }
-
 
 // G
 // ABSTRACT AND WRITE SPECIFICATION
