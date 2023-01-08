@@ -261,11 +261,11 @@ parent.appendChild (new_element);
 new_element.classList.add ("programme");
 new_element.innerHTML = `
 <div> 
-  <h5> ${programme.name}</h5>
-  <p> ${UNIVERSITIES[programme.universityID.name]} </p>
-  <p> ${CITIES[UNIVERSITIES[programme.universityID].cityID]},${LANGUAGES[programme.languageID.name]} </p>
+  <h5>${programme.name}</h5>
+  <p>${UNIVERSITIES[programme.universityID.name]} </p>
+  <p>${CITIES[UNIVERSITIES[programme.universityID].cityID]},${LANGUAGES[programme.languageID.name]} </p>
     <div> 
-      <p>${LEVELS[programme.levelID].name}, ${SUBJECTS[programme.subjectID].name}, ${LANGUAGES[programme.languageID.name]}</p>
+      <p>${LEVELS[programme.levelID-1].name}, ${SUBJECTS[programme.subjectID].name}, ${LANGUAGES[programme.languageID.name]}</p>
   </div>
 </div>
 
@@ -274,6 +274,7 @@ new_element.innerHTML = `
 </div> 
 `
 }
+
 // G
 // CODE according to the specification
 function update_programmes () {
@@ -292,7 +293,7 @@ function update_programmes () {
 
   */
  const update_box = document.querySelector ("#programmes > ul");
-update_box.innerHTML = ``;
+  update_box.innerHTML = ``;
 
 let programmes = read_filters(); 
   if (programmes.length !== 0){
@@ -300,12 +301,11 @@ let programmes = read_filters();
     text.innerHTML = ``; 
   } else {
     let text = document.querySelector ("#programmes > p");
-    text.innerHTML = `Inga program upfyller nuvarande filter.`; 
+    text.innerHTML = `Inga program uppfyller nuvarande filter.`; 
   }
 
   array_each(programmes, create_programme);
 }
-
 
 // G
 // WRITE SPECIFICATION
@@ -317,13 +317,14 @@ let programmes = read_filters();
 function read_filters () {
   
 /*
-ARGUMENT
-This function does not take any arguments 
+  ARGUMENT
+    - This function does not take any arguments 
 
-SIDE-EFFECT
-The function creates an array (programmes) that includes all programmes from PROGRAMMES which includes the selected city, level, subject and any possible value in the search-field.
+  SIDE-EFFECT
+    -The function creates an array (programmes) that includes all programmes from PROGRAMMES which includes the selected city, level, subject and any possible value in the search-field.
 
-Return programmes
+  RETURN
+    - Programmes
   */
   const city_selected_dom = document.querySelectorAll("#country_filter li.selected");
 
